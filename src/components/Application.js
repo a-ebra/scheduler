@@ -1,33 +1,36 @@
-import React, { useState } from "react";
+import React from "react";
 import DayList from './DayList';
 import "components/Application.scss";
 
-//import { getAppointmentsForDay, getInterview,getInterviewersForDay} from "helpers/selectors";
+import { getAppointmentsForDay, getInterview,getInterviewersForDay} from "helpers/selectors";
+import useApplicationData from "hooks/useApplicationData"
 
-// eslint-disale-next-line
 import axios from 'axios';
 
-const days = [
-  {
-    id: 1,
-    name: "Monday",
-    spots: 2,
-  },
-  {
-    id: 2,
-    name: "Tuesday",
-    spots: 5,
-  },
-  {
-    id: 3,
-    name: "Wednesday",
-    spots: 0,
-  },
-];
 
 export default function Application(props) {
+  const {
+    state,
+    setDay,
+    bookInterview,
+    cancelInterview
+  } = useApplicationData();
 
-  const [day, setDay] = useState("Monday")
+  const interviewers = getInterviewersForDay(state, state.day);
+
+  const appointments = getAppointmentsForDay(state, state.day).map(
+    appointment => {
+    return (
+      <Appointment
+        key={appointment.id}
+        {...appointment}
+        interview={getInterview(state, appointment.interview)}
+        interviewers={interviewers}
+        bookInterview={bookInterview}
+        cancelInterview={cancelInterview}
+      />
+    );
+  });
 
   return (
     <main className="layout">
@@ -40,8 +43,8 @@ export default function Application(props) {
       <hr className="sidebar__separator sidebar--centered" />
       <nav className="sidebar__menu">
       <DayList
-        days={days}
-        day={day}
+        days={state.days}
+        day={state.day}
         setDay={setDay}
       />
       </nav>
@@ -52,7 +55,8 @@ export default function Application(props) {
       />
       </section>
       <section className="schedule">
-        {/* Replace this with the schedule elements durint the "The Scheduler" activity. */}
+      {appointments}
+        <Appointment key="last" time="5pm" />
       </section>
     </main>
   );
