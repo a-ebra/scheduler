@@ -52,7 +52,7 @@ describe("Application", () => {
       fireEvent.click(getByText(appointment, "Save"));
       
 
-      expect(getByText(appointment, "Saving")).toBeInTheDocument()
+      expect(getByText(appointment, "SAVING")).toBeInTheDocument()
 
       await waitForElement(() => getByText(appointment, "Lydia Miller-Jones"));
 
