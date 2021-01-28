@@ -111,7 +111,7 @@ describe("Application", () => {
       getByPlaceholderText(appointment, /enter student name/i)
     ).toBeInTheDocument();
     //4.Enter the name "Lydia Miller-Jones" into the input with the placeholder "Enter Student Name" & select interviewer.
-    fireEvent.change(getByPlaceholderText(appointment, /enter student name/i), {
+    fireEvent.change(getByPlaceholderText(appointment, "enter student name"), {
       target: { value: "Lydia Miller-Jones" }
     });
     fireEvent.click(getByAltText(appointment, "Sylvia Palmer"));
