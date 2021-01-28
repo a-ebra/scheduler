@@ -78,5 +78,8 @@ export default {
         data: fixtures.interviewers
       });
     }
-  })
+  }),
+  put: jest.fn( (url,appointment) => {
+    return  Promise.resolve()
+   })
 }

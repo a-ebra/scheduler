@@ -71,7 +71,6 @@ const Appointment = props => {
                 .bookInterview(props.id, save(name, interviewer), props.day)
                 .then(() => transition(SHOW))
                 .catch(err => {
-                  console.log(err);
                   transition(ERROR_SAVE, true);
                 });
             } else {
