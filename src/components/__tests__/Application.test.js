@@ -111,7 +111,7 @@ describe("Application", () => {
       getByPlaceholderText(appointment, /enter student name/i)
     ).toBeInTheDocument();
     //4.Enter the name "Lydia Miller-Jones" into the input with the placeholder "Enter Student Name" & select interviewer.
-    fireEvent.change(getByPlaceholderText(appointment, "enter student name"), {
+    fireEvent.change(getByPlaceholderText(appointment, "Enter Student Name"), {
       target: { value: "Lydia Miller-Jones" }
     });
     fireEvent.click(getByAltText(appointment, "Sylvia Palmer"));
@@ -147,7 +147,7 @@ describe("Application", () => {
       //6.Click the "Save" button on that same appointment.
       fireEvent.click(getByText(appointment, "Save"));
       //7.Check that the element with the text "Saving" is displayed.
-      expect(getByText(appointment, "Saving")).toBeInTheDocument();
+      expect(getByText(appointment, "SAVING")).toBeInTheDocument();
       //8.Wait until the element with the text "Saving"is removed
       await waitForElementToBeRemoved(() => getByText(appointment, "Saving"));
       //9.check that the element with text "could not save" is displayed
