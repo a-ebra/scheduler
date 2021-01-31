@@ -21,6 +21,7 @@ const CONFIRM = "CONFIRM"
 const EDIT = "EDIT"
 const ERROR_DELETE = "ERROR_DELETE"
 const ERROR_SAVE = "ERROR_SAVE"
+
 const save = (name, interviewer) => {
   const interview = {
     student: name,
@@ -71,6 +72,7 @@ const Appointment = props => {
                 .bookInterview(props.id, save(name, interviewer), props.day)
                 .then(() => transition(SHOW))
                 .catch(err => {
+                  console.log(err);
                   transition(ERROR_SAVE, true);
                 });
             } else {
@@ -79,7 +81,7 @@ const Appointment = props => {
           }}
         />
       )}
-              {mode === EDIT &&
+      {mode === EDIT &&
         <Form
           name={props.interview.student}
           value={props.interview.interviewer.id}
